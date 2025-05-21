@@ -1,0 +1,47 @@
+using UnityEditor;
+using UnityEngine;
+using Oculus.Interaction;
+
+public static class EvidenceAutoSetup
+{
+    [MenuItem("Tools/Setup Evidence Objects")]
+    public static void SetupEvidence()
+    {
+        GameObject evidence = GameObject.Find("evidence");
+        if (evidence == null)
+        {
+            Debug.LogWarning("No 'evidence' GameObject found.");
+            return;
+        }
+
+        foreach (Transform child in evidence.transform)
+        {
+            GameObject obj = child.gameObject;
+
+            if (obj.GetComponent<Grabbable>() && obj.GetComponent<GrabInteractable>()) continue;
+
+            // Add Rigidbody
+            if (!obj.TryGetComponent(out Rigidbody rb))
+                rb = obj.AddComponent<Rigidbody>();
+
+            rb.useGravity = false;
+            rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.None;
+
+            // Add Collider if missing
+            if (!obj.GetComponent<Collider>())
+                obj.AddComponent<BoxCollider>();
+
+            // Grabbable
+            var grabbable = obj.GetComponent<Grabbable>() ?? obj.AddComponent<Grabbable>();
+
+            // GrabFreeTransformer
+            var transformer = obj.GetComponent<GrabFreeTransformer>() ?? obj.AddComponent<GrabFreeTransformer>();
+
+            // GrabInteractable
+            var grabInteractable = obj.GetComponent<GrabInteractable>() ?? obj.AddComponent<GrabInteractable>();
+        }
+
+        Debug.Log("Evidence setup complete.");
+    }
+}
