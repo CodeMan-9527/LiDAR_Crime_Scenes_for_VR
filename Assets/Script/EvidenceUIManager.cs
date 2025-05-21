@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -8,8 +8,9 @@ public class EvidenceUIManager : MonoBehaviour
     [Header("UI References")]
     public GameObject firstLayerUI;
     public GameObject secondLayerUI;
+    public Transform toggleParent; // Content 对象
+    public GameObject togglePrefab; // Toggle 预制体
 
-    public TMP_Dropdown dropdown;
     public Button loadEvidenceButton;
     public Button unloadEvidenceButton;
 
@@ -19,12 +20,16 @@ public class EvidenceUIManager : MonoBehaviour
     private Transform evidenceTransform;
     private bool hasLoadedEvidenceList = false;
 
+    // 用于记录每个 Toggle 及其绑定的物体
+    private Dictionary<Toggle, Transform> toggleMap = new Dictionary<Toggle, Transform>();
+    private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
+
     void Start()
     {
-        // ��ʼ״̬
         firstLayerUI.SetActive(true);
         secondLayerUI.SetActive(false);
         unloadEvidenceButton.gameObject.SetActive(false);
+        loadEvidenceButton.gameObject.SetActive(true);
     }
 
     public void ShowSecondUI()
@@ -48,44 +53,67 @@ public class EvidenceUIManager : MonoBehaviour
         }
 
         evidenceTransform = evidenceObj.transform;
+        toggleMap.Clear();
 
-        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
         foreach (Transform child in evidenceTransform)
         {
-            options.Add(new TMP_Dropdown.OptionData(child.name));
+            // 创建 Toggle
+            GameObject toggleGO = Instantiate(togglePrefab, toggleParent);
+            Toggle toggle = toggleGO.GetComponent<Toggle>();
+            TextMeshProUGUI label = toggleGO.GetComponentInChildren<TextMeshProUGUI>();
+            label.text = child.name;
+            toggle.isOn = false; // 默认未选中
+
+            toggleMap.Add(toggle, child);
+            originalPositions[child] = child.position;
         }
 
-        dropdown.ClearOptions();
-        dropdown.AddOptions(options);
         hasLoadedEvidenceList = true;
     }
 
     public void LoadSelectedEvidence()
     {
-        int index = dropdown.value;
-        if (evidenceTransform == null || index < 0 || index >= evidenceTransform.childCount)
-            return;
+        float spacing = 0.2f; // 物体间的间距
+        float startPos = 0.0f; // 起始位置
 
-        // ȫ���ȹر�
-        foreach (Transform child in evidenceTransform)
+        int counter = 0; // 计数器，用于沿直线排列
+
+        foreach (var pair in toggleMap)
         {
-            child.gameObject.SetActive(false);
-        }
+            Toggle toggle = pair.Key;
+            Transform evidence = pair.Value;
 
-        // ����ѡ����
-        evidenceTransform.GetChild(index).gameObject.SetActive(true);
+            if (toggle.isOn)
+            {
+                // 沿着X轴按照导入顺序排列
+                evidence.position = new Vector3(startPos + (counter * spacing),0.9f,0.3f);
+                counter++;
+            }
+
+            // 设置 toggle 为不可选
+            toggle.interactable = false;
+        }
 
         loadEvidenceButton.gameObject.SetActive(false);
         unloadEvidenceButton.gameObject.SetActive(true);
     }
 
+
     public void UnloadEvidence()
     {
-        if (evidenceTransform == null) return;
-
-        foreach (Transform child in evidenceTransform)
+        foreach (var pair in toggleMap)
         {
-            child.gameObject.SetActive(false);
+            Toggle toggle = pair.Key;
+            Transform evidence = pair.Value;
+
+            if (originalPositions.ContainsKey(evidence))
+            {
+                evidence.position = originalPositions[evidence];
+            }
+
+            // 恢复 toggle 为可交互
+            toggle.interactable = true;
+            toggle.isOn = false;
         }
 
         unloadEvidenceButton.gameObject.SetActive(false);
