@@ -8182,7 +8182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc5c234723e3a54d8dd09b131117743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshType: 5
+  _meshType: 1
 --- !u!114 &460143576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8213,7 +8213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2609c54f376cffc4da1ab9401cc1a36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skeletonType: 5
+  _skeletonType: 1
   _updateRootPose: 0
   _updateRootScale: 1
   _enablePhysicsCapsules: 0
@@ -8520,72 +8520,6 @@ MonoBehaviour:
   _includeChildrenAsDependents: 1
   _gameObjects: []
   _monoBehaviours: []
---- !u!1001 &473117232
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1320541235}
-    m_Modifications:
-    - target: {fileID: 4371717840798781867, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: SortKey
-      value: 4036545478
-      objectReference: {fileID: 0}
-    - target: {fileID: 6063601427096105333, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_Name
-      value: room
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9999
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -9999
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 9999
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
---- !u!4 &473117233 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6876413837137750991, guid: 2ab9829c5f818964da0fdb900a8c53de, type: 3}
-  m_PrefabInstance: {fileID: 473117232}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &474850548
 GameObject:
   m_ObjectHideFlags: 0
@@ -23936,7 +23870,6 @@ Transform:
   - {fileID: 127416465}
   - {fileID: 1548605928}
   - {fileID: 397364640}
-  - {fileID: 473117233}
   - {fileID: 1625220832}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29563,7 +29496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc5c234723e3a54d8dd09b131117743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshType: 4
+  _meshType: 0
 --- !u!114 &1603087932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29594,7 +29527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2609c54f376cffc4da1ab9401cc1a36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skeletonType: 4
+  _skeletonType: 0
   _updateRootPose: 0
   _updateRootScale: 1
   _enablePhysicsCapsules: 0
