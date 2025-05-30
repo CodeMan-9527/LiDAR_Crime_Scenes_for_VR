@@ -143,7 +143,7 @@ PlayerSettings:
   bundleVersion: 1.0.0
   preloadedAssets:
   - {fileID: 11400000, guid: f8a442de0c8906f4d9c00184993fc289, type: 2}
-  - {fileID: 11400000, guid: 027b9842390572245acae8d5bac0752f, type: 2}
+  - {fileID: 0}
   - {fileID: -944628639613478452, guid: 7c16193816129504abe2f653f839774d, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -895,7 +895,7 @@ PlayerSettings:
     PS5: 
     QNX: 
     ReservedCFE: 
-    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS;ISDK_OPENXR_HAND
+    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS;ISDK_OPENXR_HAND;FUSION_WEAVER;FUSION2;FUSION_LOGLEVEL_INFO
     VisionOS: 
     WebGL: 
     Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS
