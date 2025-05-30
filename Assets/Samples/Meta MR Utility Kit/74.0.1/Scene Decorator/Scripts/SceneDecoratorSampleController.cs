@@ -241,6 +241,6 @@ public class SceneDecoratorSampleController : MonoBehaviour
     {
         await OVRScene.RequestSpaceSetup();
         await MRUK.Instance.LoadSceneFromDevice(false);
-        await SpaceMapGPU.StartSpaceMap(MRUK.RoomFilter.CurrentRoomOnly);
+       // await SpaceMapGPU.StartSpaceMap(MRUK.RoomFilter.CurrentRoomOnly);
     }
 }

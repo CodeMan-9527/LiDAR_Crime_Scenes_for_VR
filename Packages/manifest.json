@@ -1,6 +1,16 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "Photon",
+      "url": "https://package.photonengine.com/fusion/v2",
+      "scopes": [
+        "com.photonengine.fusion",
+        "com.photonengine.fusion.transport.udp"
+      ]
+    }
+  ],
   "dependencies": {
-    "com.meta.xr.sdk.all": "74.0.2",
+    "com.meta.xr.sdk.all": "76.0.1",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "2.7.1",
     "com.unity.feature.development": "1.0.2",

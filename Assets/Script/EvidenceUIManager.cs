@@ -9,7 +9,7 @@ public class EvidenceUIManager : MonoBehaviour
     public GameObject firstLayerUI;
     public GameObject secondLayerUI;
     public Transform toggleParent; // Reference to ScrollView > Content
-    public GameObject togglePrefab; // Toggle prefab
+    public GameObject togglePrefab;
 
     public Button loadEvidenceButton;
     public Button unloadEvidenceButton;
@@ -22,6 +22,8 @@ public class EvidenceUIManager : MonoBehaviour
 
     private Dictionary<Toggle, Transform> toggleMap = new Dictionary<Toggle, Transform>();
     private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
+
+    private readonly Vector3 hiddenPosition = new Vector3(9999, -9999, 9999);
 
     void Start()
     {
@@ -65,8 +67,8 @@ public class EvidenceUIManager : MonoBehaviour
             toggleMap.Add(toggle, child);
             originalPositions[child] = child.position;
 
-            // Start disabled
-            child.gameObject.SetActive(false);
+            child.gameObject.SetActive(true);
+            child.position = hiddenPosition;
         }
 
         hasLoadedEvidenceList = true;
@@ -81,12 +83,11 @@ public class EvidenceUIManager : MonoBehaviour
 
             if (toggle.isOn)
             {
-                obj.gameObject.SetActive(true);
                 FindObjectOfType<EvidenceSpawnManager>()?.SnapToSpawn(obj);
             }
             else
             {
-                obj.gameObject.SetActive(false);
+                obj.position = hiddenPosition;
             }
 
             toggle.interactable = false;
@@ -103,12 +104,7 @@ public class EvidenceUIManager : MonoBehaviour
             Toggle toggle = pair.Key;
             Transform obj = pair.Value;
 
-            obj.gameObject.SetActive(false);
-
-            if (originalPositions.ContainsKey(obj))
-            {
-                obj.position = originalPositions[obj];
-            }
+            obj.position = hiddenPosition;
 
             toggle.isOn = false;
             toggle.interactable = true;
