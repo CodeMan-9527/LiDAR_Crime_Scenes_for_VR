@@ -8,6 +8,7 @@ public class EvidenceUIManager : MonoBehaviour
     [Header("UI References")]
     public GameObject firstLayerUI;
     public GameObject secondLayerUI;
+   
     public Transform toggleParent; // Reference to ScrollView > Content
     public GameObject togglePrefab;
 
@@ -15,7 +16,8 @@ public class EvidenceUIManager : MonoBehaviour
     public Button unloadEvidenceButton;
 
     [Header("Settings")]
-    public string evidenceObjectName = "evidence";
+    //public string evidenceObjectName = "evidence";
+    public string evidenceObjectName ;
 
     private Transform evidenceTransform;
     private bool hasLoadedEvidenceList = false;
@@ -29,20 +31,36 @@ public class EvidenceUIManager : MonoBehaviour
     {
         firstLayerUI.SetActive(true);
         secondLayerUI.SetActive(false);
+        //thirdLayerUI.SetActive(false);
         unloadEvidenceButton.gameObject.SetActive(false);
         loadEvidenceButton.gameObject.SetActive(true);
+    }
+
+    public void loadEvidence() {
+        evidenceObjectName = "evidence";
+        ShowSecondUI();
+
+    }
+    public void loadRoom() {
+        evidenceObjectName = "room";
+        ShowSecondUI();
+
     }
 
     public void ShowSecondUI()
     {
         firstLayerUI.SetActive(false);
+        
         secondLayerUI.SetActive(true);
+      
 
         if (!hasLoadedEvidenceList)
         {
             LoadEvidenceList();
         }
     }
+
+    
 
     void LoadEvidenceList()
     {
