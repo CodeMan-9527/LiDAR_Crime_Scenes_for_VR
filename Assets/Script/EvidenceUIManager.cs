@@ -14,6 +14,7 @@ public class EvidenceUIManager : MonoBehaviour
 
     public Button loadEvidenceButton;
     public Button unloadEvidenceButton;
+    public Button backButton;
 
     [Header("Settings")]
     //public string evidenceObjectName = "evidence";
@@ -31,9 +32,10 @@ public class EvidenceUIManager : MonoBehaviour
     {
         firstLayerUI.SetActive(true);
         secondLayerUI.SetActive(false);
-        //thirdLayerUI.SetActive(false);
+    
         unloadEvidenceButton.gameObject.SetActive(false);
         loadEvidenceButton.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(true);
     }
 
     public void loadEvidence() {
@@ -60,7 +62,15 @@ public class EvidenceUIManager : MonoBehaviour
         }
     }
 
-    
+    public void ShowFirstUI()
+    {
+        firstLayerUI.SetActive(true);
+
+        secondLayerUI.SetActive(false);
+
+    }
+
+
 
     void LoadEvidenceList()
     {
@@ -113,6 +123,7 @@ public class EvidenceUIManager : MonoBehaviour
 
         loadEvidenceButton.gameObject.SetActive(false);
         unloadEvidenceButton.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(false);
     }
 
     public void UnloadEvidence()
@@ -130,5 +141,6 @@ public class EvidenceUIManager : MonoBehaviour
 
         unloadEvidenceButton.gameObject.SetActive(false);
         loadEvidenceButton.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(true);
     }
 }
