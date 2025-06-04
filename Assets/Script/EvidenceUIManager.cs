@@ -2,23 +2,22 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 
 public class EvidenceUIManager : MonoBehaviour
 {
     [Header("UI References")]
     public GameObject firstLayerUI;
     public GameObject secondLayerUI;
-   
     public Transform toggleParent; 
     public GameObject togglePrefab;
-
     public Button loadEvidenceButton;
     public Button unloadEvidenceButton;
     public Button backButton;
-
+    public TextMeshProUGUI notificationText;
     [Header("Settings")]
-   
     public string evidenceObjectName ;
+    
 
     private Transform evidenceTransform;
     
@@ -32,7 +31,7 @@ public class EvidenceUIManager : MonoBehaviour
     {
         firstLayerUI.SetActive(true);
         secondLayerUI.SetActive(false);
-    
+        ShowMessage("Welcome,you have joined the session.", 4f);
         unloadEvidenceButton.gameObject.SetActive(false);
         loadEvidenceButton.gameObject.SetActive(true);
         backButton.gameObject.SetActive(true);
@@ -154,4 +153,33 @@ public class EvidenceUIManager : MonoBehaviour
         loadEvidenceButton.gameObject.SetActive(true);
         backButton.gameObject.SetActive(true);
     }
+
+    public void ExitApplication()
+    {
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
+
+    public void ShowMessage(string message, float duration = 2f)
+    {
+        StartCoroutine(ShowMessageCoroutine(message, duration));
+    }
+
+    private IEnumerator ShowMessageCoroutine(string message, float duration)
+    {
+        notificationText.text = message;
+        notificationText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(duration);
+
+        notificationText.gameObject.SetActive(false);
+    }
+
+
 }
+
+
+
