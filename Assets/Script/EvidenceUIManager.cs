@@ -9,7 +9,7 @@ public class EvidenceUIManager : MonoBehaviour
     public GameObject firstLayerUI;
     public GameObject secondLayerUI;
    
-    public Transform toggleParent; // Reference to ScrollView > Content
+    public Transform toggleParent; 
     public GameObject togglePrefab;
 
     public Button loadEvidenceButton;
@@ -17,11 +17,11 @@ public class EvidenceUIManager : MonoBehaviour
     public Button backButton;
 
     [Header("Settings")]
-    //public string evidenceObjectName = "evidence";
+   
     public string evidenceObjectName ;
 
     private Transform evidenceTransform;
-    private bool hasLoadedEvidenceList = false;
+    
 
     private Dictionary<Toggle, Transform> toggleMap = new Dictionary<Toggle, Transform>();
     private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
@@ -49,18 +49,22 @@ public class EvidenceUIManager : MonoBehaviour
 
     }
 
+  
+
+    private string currentLoadedName = null;
+
     public void ShowSecondUI()
     {
         firstLayerUI.SetActive(false);
-        
         secondLayerUI.SetActive(true);
-      
 
-        if (!hasLoadedEvidenceList)
+        if (currentLoadedName != evidenceObjectName)
         {
-            LoadEvidenceList();
+            LoadEvidenceList(evidenceObjectName);
+            currentLoadedName = evidenceObjectName;
         }
     }
+
 
     public void ShowFirstUI()
     {
@@ -70,19 +74,25 @@ public class EvidenceUIManager : MonoBehaviour
 
     }
 
-
-
-    void LoadEvidenceList()
+    void LoadEvidenceList(string evidenceObjectName)
     {
+        // clear Toggle UI 
+        foreach (Transform child in toggleParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        toggleMap.Clear();
+        originalPositions.Clear();
+
         GameObject evidenceObj = GameObject.Find(evidenceObjectName);
         if (evidenceObj == null)
         {
-            Debug.LogError("Can't find GameObject named 'evidence'");
+            Debug.LogError($"Can't find GameObject named '{evidenceObjectName}'");
             return;
         }
 
         evidenceTransform = evidenceObj.transform;
-        toggleMap.Clear();
 
         foreach (Transform child in evidenceTransform)
         {
@@ -98,9 +108,10 @@ public class EvidenceUIManager : MonoBehaviour
             child.gameObject.SetActive(true);
             child.position = hiddenPosition;
         }
-
-        hasLoadedEvidenceList = true;
     }
+
+
+
 
     public void LoadSelectedEvidence()
     {
