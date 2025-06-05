@@ -19,13 +19,10 @@ public class EvidenceUIManager : MonoBehaviour
 
     [Header("Settings")]
     public string evidenceObjectName ;
-    
-
     private Transform evidenceTransform;
    
     private Dictionary<Toggle, Transform> toggleMap = new Dictionary<Toggle, Transform>();
     private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
-
     private readonly Vector3 hiddenPosition = new Vector3(9999, -9999, 9999);
     
 
@@ -116,6 +113,28 @@ public class EvidenceUIManager : MonoBehaviour
 
     public void LoadSelectedEvidence()
     {
+        //foreach (var pair in toggleMap)
+        //{
+        //    Toggle toggle = pair.Key;
+        //    Transform obj = pair.Value;
+
+        //    if (toggle.isOn)
+        //    {
+        //        FindObjectOfType<EvidenceSpawnManager>()?.SnapToSpawn(obj);
+        //    }
+        //    else
+        //    {
+        //        obj.position = hiddenPosition;
+        //    }
+
+        //    toggle.interactable = false;
+        //}
+
+        //loadEvidenceButton.gameObject.SetActive(false);
+        //unloadEvidenceButton.gameObject.SetActive(true);
+        //backButton.gameObject.SetActive(false);
+        bool anySelected = false;
+
         foreach (var pair in toggleMap)
         {
             Toggle toggle = pair.Key;
@@ -123,19 +142,26 @@ public class EvidenceUIManager : MonoBehaviour
 
             if (toggle.isOn)
             {
-                FindObjectOfType<EvidenceSpawnManager>()?.SnapToSpawn(obj);
+                anySelected = true;
+                Object.FindAnyObjectByType<EvidenceSpawnManager>()?.SnapToSpawn(obj);
+                toggle.interactable = false;
             }
             else
             {
                 obj.position = hiddenPosition;
             }
-
-            toggle.interactable = false;
         }
 
-        loadEvidenceButton.gameObject.SetActive(false);
-        unloadEvidenceButton.gameObject.SetActive(true);
-        backButton.gameObject.SetActive(false);
+        if (anySelected)
+        {
+            loadEvidenceButton.gameObject.SetActive(false);
+            unloadEvidenceButton.gameObject.SetActive(true);
+            backButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            ShowMessage("Please select at least one evidence to load.", 3f);
+        }
     }
 
     public void UnloadEvidence()

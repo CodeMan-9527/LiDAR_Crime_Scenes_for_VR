@@ -31,7 +31,7 @@ namespace Meta.XR.MultiplayerBlocks.Fusion
     /// of all the exposed callbacks please see the <see cref="INetworkRunnerCallbacks"/> documentation page
     /// https://doc-api.photonengine.com/en/fusion/v2/interface_fusion_1_1_i_network_runner_callbacks.html.
     /// </summary>
-    public class FusionBBEvents : MonoBehaviour, INetworkRunnerCallbacks
+    public class CustomFusionBBEvents : MonoBehaviour, INetworkRunnerCallbacks
     {
         // The INetworkRunnerCallbacks interface has to be placed in the root of the
         // network runner. This helper allows us to share these events
