@@ -91,6 +91,11 @@ public class MenuFlowManager: MonoBehaviour, INetworkRunnerCallbacks
     {
         UpdatePlayerCount(_playerCount + 1);
         ShowStatus("A player joined the session");
+
+        if (EvidenceUIManager.Instance != null)
+        {
+            EvidenceUIManager.Instance.ShowMessage("A new player has joined!", 3f);
+        }
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)

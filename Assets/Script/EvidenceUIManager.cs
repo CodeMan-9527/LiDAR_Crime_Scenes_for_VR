@@ -26,6 +26,14 @@ public class EvidenceUIManager : MonoBehaviour
     private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
 
     private readonly Vector3 hiddenPosition = new Vector3(9999, -9999, 9999);
+    //
+    public static EvidenceUIManager Instance;
+    
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
     void Start()
     {
