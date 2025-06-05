@@ -10,6 +10,7 @@ using System.Threading;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using TMPro;
+using System.Collections;
 
 public class CustomMatchmakingFusionFix : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class CustomMatchmakingFusionFix : MonoBehaviour
     private object runner;
 
     public TextMeshProUGUI playerCountText;
+    //public TextMeshProUGUI notificationText;
 
     void Update()
     {
@@ -102,6 +104,7 @@ public class CustomMatchmakingFusionFix : MonoBehaviour
             PlayerCount = options.MaxPlayersPerRoom,
             IsVisible = !options.IsPrivate
         });
+
 
         return new CustomMatchmaking.RoomOperationResult
         {

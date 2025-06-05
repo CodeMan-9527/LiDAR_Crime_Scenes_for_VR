@@ -15,7 +15,7 @@ public class EvidenceUIManager : MonoBehaviour
     public Button unloadEvidenceButton;
     public Button backButton;
     public TextMeshProUGUI notificationText;
-    
+
 
     [Header("Settings")]
     public string evidenceObjectName ;
@@ -30,7 +30,7 @@ public class EvidenceUIManager : MonoBehaviour
     {
         firstLayerUI.SetActive(true);
         secondLayerUI.SetActive(false);
-        ShowMessage("Welcome,you have joined the session.", 4f);
+        ShowMessage("Welcome,you are joining the session.", 3f);
         unloadEvidenceButton.gameObject.SetActive(false);
         loadEvidenceButton.gameObject.SetActive(true);
         backButton.gameObject.SetActive(true);
@@ -113,26 +113,6 @@ public class EvidenceUIManager : MonoBehaviour
 
     public void LoadSelectedEvidence()
     {
-        //foreach (var pair in toggleMap)
-        //{
-        //    Toggle toggle = pair.Key;
-        //    Transform obj = pair.Value;
-
-        //    if (toggle.isOn)
-        //    {
-        //        FindObjectOfType<EvidenceSpawnManager>()?.SnapToSpawn(obj);
-        //    }
-        //    else
-        //    {
-        //        obj.position = hiddenPosition;
-        //    }
-
-        //    toggle.interactable = false;
-        //}
-
-        //loadEvidenceButton.gameObject.SetActive(false);
-        //unloadEvidenceButton.gameObject.SetActive(true);
-        //backButton.gameObject.SetActive(false);
         bool anySelected = false;
 
         foreach (var pair in toggleMap)
@@ -191,7 +171,7 @@ public class EvidenceUIManager : MonoBehaviour
         #endif
     }
 
-    public void ShowMessage(string message, float duration = 2f)
+    void ShowMessage(string message, float duration = 2f)
     {
         StartCoroutine(ShowMessageCoroutine(message, duration));
     }
@@ -206,10 +186,7 @@ public class EvidenceUIManager : MonoBehaviour
         notificationText.gameObject.SetActive(false);
     }
 
-    public void WelcomeJoin()
-    {
-        ShowMessage("Welcome,you have joined the session.", 4f);
-    }
+
 
 
 
