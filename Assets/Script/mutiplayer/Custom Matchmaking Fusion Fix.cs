@@ -8,6 +8,8 @@ using System;
 using UnityEngine;
 using System.Threading;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using TMPro;
 
 public class CustomMatchmakingFusionFix : MonoBehaviour
 {
@@ -32,6 +34,19 @@ public class CustomMatchmakingFusionFix : MonoBehaviour
     private NetworkRunner _runnerPrefab;
     private List<SessionInfo> _sessionList;
     private object runner;
+
+    public TextMeshProUGUI playerCountText;
+
+    void Update()
+    {
+        var runner = CustomMatchmakingFusionFix.GetActiveNetworkRunner();
+        if (runner != null)
+        {
+            int count = runner.ActivePlayers.Count();
+            playerCountText.text = $"Online Players: {count}";
+        }
+    }
+
 
     private void Awake()
     {

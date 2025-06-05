@@ -15,25 +15,19 @@ public class EvidenceUIManager : MonoBehaviour
     public Button unloadEvidenceButton;
     public Button backButton;
     public TextMeshProUGUI notificationText;
+    
+
     [Header("Settings")]
     public string evidenceObjectName ;
     
 
     private Transform evidenceTransform;
-    
-
+   
     private Dictionary<Toggle, Transform> toggleMap = new Dictionary<Toggle, Transform>();
     private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
 
     private readonly Vector3 hiddenPosition = new Vector3(9999, -9999, 9999);
-    //
-    public static EvidenceUIManager Instance;
     
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
 
     void Start()
     {
@@ -185,6 +179,12 @@ public class EvidenceUIManager : MonoBehaviour
 
         notificationText.gameObject.SetActive(false);
     }
+
+    public void WelcomeJoin()
+    {
+        ShowMessage("Welcome,you have joined the session.", 4f);
+    }
+
 
 
 }
