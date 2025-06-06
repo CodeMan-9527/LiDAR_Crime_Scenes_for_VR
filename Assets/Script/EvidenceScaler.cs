@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class EvidenceScaler : MonoBehaviour
 {
-    public Transform evidenceParent; // Drag the "evidence" GameObject here
+    public Transform evidenceParent; // Assign the "evidence" GameObject in Inspector
+    public Transform roomParent;     // Assign the "room" GameObject in Inspector
     public Button scaleUpButton;
     public Button scaleDownButton;
     public float scaleStep = 0.1f;
@@ -17,23 +17,33 @@ public class EvidenceScaler : MonoBehaviour
 
     void ScaleUp()
     {
-        foreach (Transform child in evidenceParent)
-        {
-            if (child.gameObject.activeSelf)
-            {
-                child.localScale += Vector3.one * scaleStep;
-            }
-        }
+        ScaleChildren(evidenceParent);
+        ScaleChildren(roomParent);
     }
 
     void ScaleDown()
     {
-        foreach (Transform child in evidenceParent)
+        ScaleChildren(evidenceParent, scaleDown: true);
+        ScaleChildren(roomParent, scaleDown: true);
+    }
+
+    void ScaleChildren(Transform parent, bool scaleDown = false)
+    {
+        if (parent == null) return;
+
+        foreach (Transform child in parent)
         {
             if (child.gameObject.activeSelf)
             {
-                Vector3 newScale = child.localScale - Vector3.one * scaleStep;
-                child.localScale = Vector3.Max(newScale, Vector3.one * 0.1f);
+                if (scaleDown)
+                {
+                    Vector3 newScale = child.localScale - Vector3.one * scaleStep;
+                    child.localScale = Vector3.Max(newScale, Vector3.one * 0.1f);
+                }
+                else
+                {
+                    child.localScale += Vector3.one * scaleStep;
+                }
             }
         }
     }

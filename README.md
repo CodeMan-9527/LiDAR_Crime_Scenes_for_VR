@@ -151,6 +151,22 @@ If Unity did not install the required packages automatically:
 
 ## Running the Application in Unity Editor
 
+### Important: Open the Correct Scene
+
+When the project is first opened, Unity may display a blank or default scene.
+
+To load the actual scene with all project elements:
+
+1. In the **Project** tab, go to: `Assets\Scenes`
+
+2. Double-click on **MainScene.unity**
+
+This will load the correct hierarchy and scene setup for the project.
+
+> 💡 Optional: To preview the welcome screen first  
+> - Double-click on **WelcomeScene.unity**  
+> - After a few seconds, it will automatically transition to MainScene
+
 ### If Using Simulator
 
 - Activate the Simulator by clicking the simulator icon (top-middle of the Unity window)
@@ -169,7 +185,11 @@ If Unity did not install the required packages automatically:
 - Scale objects using grab or the UI scale buttons
 
 ---
+## Divice must be in **Developer Mode**
+- Before running or build for the Quest 3
+- The device must be in **developer mode**
 
+---
 ## Running on Meta Quest 3 Headset
 
 - Connect your headset via USB
@@ -186,3 +206,15 @@ If Unity did not install the required packages automatically:
    are checked
 
 This ensures the welcome screen plays before launching the main scene.
+
+---
+## Building APK from project
+
+- First: Connect the Meta Quest 3 device to the computer with the porject open
+- Go to `File > Build Profiles`
+- Click on `Meta Quest'
+- Scroll down and you will see **Run Device** with a drop down option
+- In the drop down option select the **Quest 3** device that is connected
+- In the project Go to `File > Build And Run`
+- If you have the Quest 3 device connnected, it will create the APK and install
+- Now you can run it

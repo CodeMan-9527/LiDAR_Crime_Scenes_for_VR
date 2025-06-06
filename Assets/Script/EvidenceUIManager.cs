@@ -15,16 +15,17 @@ public class EvidenceUIManager : MonoBehaviour
     public Button unloadEvidenceButton;
     public Button backButton;
     public TextMeshProUGUI notificationText;
-
-
     [Header("Settings")]
     public string evidenceObjectName ;
+    
+
     private Transform evidenceTransform;
-   
+    
+
     private Dictionary<Toggle, Transform> toggleMap = new Dictionary<Toggle, Transform>();
     private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
+
     private readonly Vector3 hiddenPosition = new Vector3(9999, -9999, 9999);
-    
 
     void Start()
     {
@@ -113,8 +114,6 @@ public class EvidenceUIManager : MonoBehaviour
 
     public void LoadSelectedEvidence()
     {
-        bool anySelected = false;
-
         foreach (var pair in toggleMap)
         {
             Toggle toggle = pair.Key;
@@ -122,26 +121,19 @@ public class EvidenceUIManager : MonoBehaviour
 
             if (toggle.isOn)
             {
-                anySelected = true;
-                Object.FindAnyObjectByType<EvidenceSpawnManager>()?.SnapToSpawn(obj);
-                toggle.interactable = false;
+                FindObjectOfType<EvidenceSpawnManager>()?.SnapToSpawn(obj);
             }
             else
             {
                 obj.position = hiddenPosition;
             }
+
+            toggle.interactable = false;
         }
 
-        if (anySelected)
-        {
-            loadEvidenceButton.gameObject.SetActive(false);
-            unloadEvidenceButton.gameObject.SetActive(true);
-            backButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            ShowMessage("Please select at least one evidence to load.", 3f);
-        }
+        loadEvidenceButton.gameObject.SetActive(false);
+        unloadEvidenceButton.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(false);
     }
 
     public void UnloadEvidence()
@@ -171,7 +163,7 @@ public class EvidenceUIManager : MonoBehaviour
         #endif
     }
 
-    void ShowMessage(string message, float duration = 2f)
+    public void ShowMessage(string message, float duration = 2f)
     {
         StartCoroutine(ShowMessageCoroutine(message, duration));
     }
@@ -185,9 +177,6 @@ public class EvidenceUIManager : MonoBehaviour
 
         notificationText.gameObject.SetActive(false);
     }
-
-
-
 
 
 }
